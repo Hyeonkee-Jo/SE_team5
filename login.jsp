@@ -5,8 +5,8 @@
 <%
    String DRIVER = "oracle.jdbc.driver.OracleDriver";
 		String URL = "jdbc:oracle:thin:@127.0.0.1:1521:DBSERVER";
-		String USER = "KIM";
-		String PASS = "KIM";
+		String USER = "SE";
+		String PASS = "SE";
 
 		Connection conn = null;
 		try{
@@ -27,7 +27,7 @@
     
 <html>
     <head>
-        <link rel="stylesheet" href="login.css">
+        <link rel="stylesheet" href="css/login.css">
     </head>
     <body>
         <label for="id_text" id="id_label">ID : </label>

@@ -1,0 +1,11 @@
+#movie_image {
+    width: 30%
+    height:300px
+    float: left
+}
+
+#movie_info {
+    width: 70%
+    height:300px
+    float: right
+}
