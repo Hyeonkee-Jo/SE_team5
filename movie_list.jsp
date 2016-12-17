@@ -42,8 +42,8 @@
         <link rel="stylesheet" href="css/movie_list.css">
     </head>
     <body>
-        <a href="" id="movie_tab">영화</a>
-        <a href="" id="reservation_tab">예매</a>
+        <a href="movie_list.jsp" id="movie_tab">영화</a>
+        <a href="movie_reservation.jsp" id="reservation_tab">예매</a>
         <a href="" id="my_info_tab">내 정보</a>
         <br>
         <div class="scroll">

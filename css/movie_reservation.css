@@ -1,0 +1,33 @@
+a:link {
+    text-decoration: none
+}
+
+#movie_tab {
+    margin-left: 200px
+}
+
+
+#reservation_tab {
+    margin-left: 200px
+}
+
+
+#my_info_tab {
+    margin-left: 200px
+}
+
+#cinema_label {
+    margin-left: 400px
+}
+
+#movie_label {
+    margin-left: 400px
+}
+
+#theater_label {
+    margin-left: 400px
+}
+
+a.list {
+    margin-left: 400px
+}

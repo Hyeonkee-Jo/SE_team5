@@ -3,43 +3,43 @@
 <%@ page import ="java.sql.*" %>
 
 <%
-   String DRIVER = "oracle.jdbc.driver.OracleDriver";
-		String URL = "jdbc:oracle:thin:@127.0.0.1:1521:DBSERVER";
-		String USER = "SE";
-		String PASS = "SE";
+	String DRIVER = "oracle.jdbc.driver.OracleDriver";
+	String URL = "jdbc:oracle:thin:@127.0.0.1:1521:DBSERVER";
+	String USER = "SE";
+	String PASS = "SE";
 
-		Connection conn = null;
-		try{
-			Class.forName(DRIVER);
-			conn = DriverManager.getConnection(URL,USER,PASS);
-		}catch(Exception e){
-			System.out.println(e.getMessage());
-		}
-		
-		try {
-			DatabaseMetaData meta = conn.getMetaData();
-			System.out.println("time data: " + meta.getTimeDateFunctions());
-			System.out.println("user: " + meta.getUserName());
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}
-		
-		String movieTitle = "다크나이트";
-		int runningtime = 0;
-		String sysnopsis = "";
-		String preview = "";
-		int rating = 0;
-		String query = "SELECT * FROM MOVIE WHERE MOVIE_TITLE = ?";
-		PreparedStatement pstmt = conn.prepareStatement(query);
-		pstmt.setString(1, movieTitle);
-		ResultSet rs = pstmt.executeQuery();
-		
-		while(rs.next()) {
-			runningtime = rs.getInt(2);
-			sysnopsis = rs.getString(3);
-			preview = rs.getString(4);
-			rating = rs.getInt(5);
-		}
+	Connection conn = null;
+	try{
+		Class.forName(DRIVER);
+		conn = DriverManager.getConnection(URL,USER,PASS);
+	}catch(Exception e){
+		System.out.println(e.getMessage());
+	}
+	
+	try {
+		DatabaseMetaData meta = conn.getMetaData();
+		System.out.println("time data: " + meta.getTimeDateFunctions());
+		System.out.println("user: " + meta.getUserName());
+	} catch (SQLException e) {
+		System.out.println(e.getMessage());
+	}
+	
+	String movieTitle = "다크나이트";
+	int runningtime = 0;
+	String sysnopsis = "";
+	String preview = "";
+	int rating = 0;
+	String query = "SELECT * FROM MOVIE WHERE MOVIE_TITLE = ?";
+	PreparedStatement pstmt = conn.prepareStatement(query);
+	pstmt.setString(1, movieTitle);
+	ResultSet rs = pstmt.executeQuery();
+	
+	while(rs.next()) {
+		runningtime = rs.getInt(3);
+		sysnopsis = rs.getString(4);
+		preview = rs.getString(5);
+		rating = rs.getInt(6);
+	}
 		
 %>
     
@@ -58,5 +58,6 @@
         </div>
         <p><%out.println(sysnopsis);%></p>
         <iframe width="560" height="315" src="<%out.println(preview);%>" frameborder="0" allowfullscreen></iframe>
+		<button type="
     </body>
 </html>
