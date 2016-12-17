@@ -1,6 +1,8 @@
 ﻿<%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="UTF-8" %>
 <%@ page import ="java.sql.*" %>
+<%@ page import ="java.util.Date" %>
+<%@ page import ="java.text.SimpleDateFormat" %>
 
 <%
 	String DRIVER = "oracle.jdbc.driver.OracleDriver";
@@ -15,58 +17,50 @@
 		System.out.println(e.getMessage());
 	}
 	
-	System.out.println("asdfasdf");
 	String reservationNumber = request.getParameter("reservationNumber");
-	String reservationDate = request.getParameter("reservationDate");
 	String startTime = request.getParameter("startTime");
-	String[] reservationDateArray = reservationDate.split("/");
 	String[] startTimeArray = startTime.split("/");
 	
-	int reservationYear = Integer.parseInt(reservationDateArray[0]);
+	SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd/HH/mm");
+	Date today = new Date();
+	String currentTime = format.format(today);
+	today = format.parse(currentTime);
+	
 	int startYear = Integer.parseInt(startTimeArray[0]);
-	int reservationMonth = Integer.parseInt(reservationDateArray[1]);
 	int startMonth = Integer.parseInt(startTimeArray[1]);
-	int reservationDay = Integer.parseInt(reservationDateArray[2]);
 	int startDay = Integer.parseInt(startTimeArray[2]);
-	int reservationHour = Integer.parseInt(reservationDateArray[3]);
 	int startHour = Integer.parseInt(startTimeArray[3]);
-	int reservationMinutes = Integer.parseInt(reservationDateArray[4]);
 	int startMinutes = Integer.parseInt(startTimeArray[4]);
 	
+	startTime = startYear + "/" + startMonth + "/" +startDay + "/" + startHour + "/" + (startMinutes - 15);
+	Date start = format.parse(startTime);
+	
 	boolean isCancel = false;
-	if(reservationYear <= startYear) {	
-		if(reservationMonth <= startMonth) {	
-			if(reservationDay <= startDay) {
-				if(reservationHour <= startHour) {	
-					if(reservationMinutes <= startMinutes - 15) {
-						try {
-							String query = "DELETE FROM RESERVATION WHERE RESERVATION_NUMBER = ?";
-							PreparedStatement pstmt = conn.prepareStatement(query);
-							pstmt.setString(1, reservationNumber);
-							int rowCount = pstmt.executeUpdate();
+	if(start.compareTo(today) > 0) {
+		try {
+			String query = "DELETE FROM RESERVATION WHERE RESERVATION_NUMBER = ?";
+			PreparedStatement pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, reservationNumber);
+			int rowCount = pstmt.executeUpdate();
 		
-							if(rowCount == 0) {
-							%>
-							<script>
-								alert("예매 취소 실패");
-							</script>
-							<%
-							}
-							else {
-							%>
-							<script>
-								alert("예매 취소 성공");
-							</script>
-							<%			
-								isCancel = true;
-							}
-		
-						} catch(SQLException e) {
-							e.printStackTrace();
-						}
-					}
-				}
+			if(rowCount == 0) {
+			%>
+			<script>
+				alert("예매 취소 실패");
+			</script>
+			<%
 			}
+			else {
+			%>
+			<script>
+				alert("예매 취소 성공");
+			</script>
+			<%			
+			isCancel = true;
+			}
+		
+		} catch(SQLException e) {
+			e.printStackTrace();
 		}
 	}
 

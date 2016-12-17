@@ -1,0 +1,22 @@
+button{
+    margin-left: 120px;
+}
+
+#listMovieR{
+    border: 1px solid black;
+    width:300px;
+    height:200px;
+    overflow: hidden;
+    
+}
+
+#listMovie{
+    width:300px;
+    height:150px;
+    overflow: auto;
+}
+#cinema_form{
+    position:absolute;
+    top:230px;
+    left:20px;
+}
