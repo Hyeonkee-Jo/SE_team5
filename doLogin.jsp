@@ -11,6 +11,9 @@
 	String userId=request.getParameter("id_text");
 	String userPwd=request.getParameter("pw_text");
 	
+	session.setAttribute("userId",userId);
+	
+	
 	Connection conn = null;
 	PreparedStatement pstmt;
 	ResultSet rs;
@@ -43,7 +46,7 @@
 		if(rs.getString(1).equals(userPwd)){
 %>
 			<script>
-				document.location.href="main.jsp";
+				document.location.href="movie_list.jsp";
 			</script>
 <%
 		}
