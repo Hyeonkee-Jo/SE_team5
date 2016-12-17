@@ -18,7 +18,7 @@
 	}
 	
 	ArrayList<String> reservationNumberList = new ArrayList<String>();
-	String customerId = (String)session.getAttribute("userId");;
+	String customerId = (String)session.getAttribute("userId");
 	String customerPw = "";
 	String customerName = "";
 	String address = "";
@@ -62,6 +62,9 @@
 
 <html>
 <body>
+<a href="movie_list.jsp" id="movie_tab">영화</a>
+<a href="movie_reservation.jsp" id="reservation_tab">예매</a>
+<a href="member_info.jsp" id="my_info_tab">내 정보</a>
 <form method="post" action="update_customer.jsp" id="update_form">
 	<label for="password" id="password_label">비밀번호 : </label>
 	<input type="text" id="password" name="password" value="<%out.print(customerPw);%>" required><br>

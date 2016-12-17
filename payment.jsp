@@ -3,38 +3,37 @@
 <%@ page import ="java.sql.*" %>
     
 <%
-   String DRIVER = "oracle.jdbc.driver.OracleDriver";
-   String URL = "jdbc:oracle:thin:@127.0.0.1:1521:DBSERVER"; 
-   String USER = "SE";
-   String PASS = "SE";
+    String DRIVER = "oracle.jdbc.driver.OracleDriver";
+    String URL = "jdbc:oracle:thin:@127.0.0.1:1521:DBSERVER"; 
+    String USER = "SE";
+    String PASS = "SE";
+
+    String userId = (String)session.getAttribute("userId");
+    String movieTitle = request.getParameter("movieTitle");
+    String cinemaRegion = request.getParameter("cinemaRegion");
+    String theaterName = request.getParameter("theaterName");
+    String startTime = request.getParameter("startTime");
+    String price = request.getParameter("price");
+    String reserve_number = "R4000";
+    int row = Integer.parseInt(request.getParameter("row"));
+    int column = Integer.parseInt(request.getParameter("column"));
     
-   // 지금 여기의 값들은 임의로 넣어준것 전 jsp에서 받아와야 한다.
-   String user_Id = "jo";
-   String movie_name = "";
-   String start_time = "";
-   String region = "";
-   String seat = "";
-   String reserve_number = "";
-   String price = "10000";
+    int[] rows = new int[row * column];
+    int[] columns = new int[row * column];
+    int count = 0;
    
-   Connection conn = null;
-   PreparedStatement pstmt;
-   ResultSet rs;
+	for(int i = 1; i <= row; i++) {
+		for(int j = 1; j <= column; j++) {
+			String a = "seat" + i + "" + j;
+			int d = Integer.parseInt(request.getParameter(a));
+			if(d == 1) {
+				rows[count] = i;
+				columns[count++] = j;
+			}
+		}
+	}
    
-   try{
-      Class.forName(DRIVER);
-      conn = DriverManager.getConnection(URL,USER,PASS);
-   }catch(Exception e){
-      System.out.println(e.getMessage());
-   }
-   
-   try {
-      DatabaseMetaData meta = conn.getMetaData();
-      System.out.println("time data: " + meta.getTimeDateFunctions());
-      System.out.println("user: " + meta.getUserName());
-   } catch (SQLException e) {
-      System.out.println(e.getMessage());
-   }
+
    
 %>
     
@@ -65,7 +64,7 @@
 <body>
     
 <form action = "payment_decision.jsp" method = "post">
-    <p>가 격 <input type = "text" name = "price" value="<%out.print(price);%>" disabled ><br></p>
+    <p>가 격 <input type = "text" name = "price" value="<%out.print(price);%>" ><br></p>
     <p>결제수단</p>
     <p>
         <input type="radio" name="credit_method" value="INTERNET" id = "card" onclick="javascript:dispList(card);"> 신용카드
@@ -103,5 +102,16 @@
     </a>
 </p>
 </form>
+<p><%out.print(userId);%></p>
+<p><%out.print(cinemaRegion);%></p>
+<p><%out.print(theaterName);%></p>
+<p><%out.print(startTime);%></p>
+<p><%out.print(price);%></p>
+<p><%out.print(row);%></p>
+<p><%out.print(column);%></p>
+
+<%for(int i = 0; i < count; i++) {%>
+<p><%out.print(rows[i] + "," + columns[i]);%></p>
+<%}%>
 </body>
 </html>

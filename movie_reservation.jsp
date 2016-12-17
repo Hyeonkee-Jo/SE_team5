@@ -43,7 +43,7 @@
     <body>
         <a href="movie_list.jsp" id="movie_tab">영화</a>
         <a href="movie_reservation.jsp" id="reservation_tab">예매</a>
-        <a href="" id="my_info_tab">내 정보</a>
+        <a href="member_info.jsp" id="my_info_tab">내 정보</a>
         <br>
         <label for="cinema_select" id="cinema_label">영화관 : </label>
         <select id="cinema_select">

@@ -99,7 +99,8 @@
 		<%for(int i = 1; i <= row; i++) {%>
 			<tr>
 			<%for(int j = 1; j <= column; j++) {%>
-				<td><button type="button" id="seat<%out.print(i);%><%out.print(j);%>" 
+				<td><input type="button" id="seat<%out.print(i);%><%out.print(j);%>" 
+				name="seat<%out.print(i);%><%out.print(j);%>" 
 				value="<%out.print(seatState[i][j]);%>" 
 				<%if(seatState[i][j] != 2) {%>
 				style=background-color:#07D567
@@ -107,7 +108,7 @@
 				<%if(seatState[i][j] != 2) {%>
 				onclick="setColor('seat<%out.print(i);%><%out.print(j);%>', 'price_text', <%out.print(price);%>)"
 				<%}%>
-				><%out.print(i);%>,<%out.print(j);%></button>
+				><%out.print(i);%>,<%out.print(j);%></input>
 				</td>
 			<%}%>
 			</tr>
@@ -115,6 +116,12 @@
         </table>
 		<label for="price_text" id="price_text_label">가격 : </label>
 		<input type="text" id="price_text" name="price" value=""></input>
+		<input type="text" name="cinemaRegion" value="<%out.print(cinemaRegion);%>" style=display:none>
+		<input type="text" name="theaterName" value="<%out.print(theaterName);%>" style=display:none>
+		<input type="text" name="startTime" value="<%out.print(startTime);%>" style=display:none>
+		<input type="text" name="movieTitle" value="<%out.print(movieTitle);%>" style=display:none>
+		<input type="text" name="row" value="<%out.print(row);%>" style=display:none>
+		<input type="text" name="column" value="<%out.print(column);%>" style=display:none>
 	</form>
 	<button type="submit" id="pay_button" form="payment_form">결제</button>
     <input type="button" id="cancel_button" value="취소" onClick="history.back()">
