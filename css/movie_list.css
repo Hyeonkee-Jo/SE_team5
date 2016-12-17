@@ -1,0 +1,42 @@
+a:link {
+    text-decoration: none
+}
+
+div.scroll {
+    width: 900px;
+    height: 700px;
+    overflow: scroll;
+}
+
+#movie_tab {
+    margin-left: 200px
+}
+
+
+#reservation_tab {
+    margin-left: 200px
+}
+
+
+#my_info_tab {
+    margin-left: 200px
+}
+
+#movie1_title {
+    margin-left: 30px
+}
+
+
+#movie2_title {
+    margin-left: 90px
+}
+
+
+#movie3_title {
+    margin-left: 100px
+}
+
+
+#movie4_title {
+    margin-left: 100px
+}
