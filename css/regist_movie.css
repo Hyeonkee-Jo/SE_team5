@@ -1,0 +1,25 @@
+
+
+.edit{
+    margin-top: 15px;
+}
+
+#edit_story{
+    width: 400px;
+    height: 200px;
+    text-align: ;
+}
+
+#edit_synop{
+    width: 400px;
+    
+}
+
+#picture{
+    width:150px;
+    height:100px;
+    position:absolute;
+    top:15px;
+    left:250px;
+    border:1px solid;
+}

@@ -1,0 +1,46 @@
+#aboutPrice{
+    position:absolute;
+    left:170px;
+    top:20px;
+}
+#timeTable_text{
+    position:absolute;
+    left:230px;
+    top:50px;
+}
+
+#timeTable{
+    position:absolute;
+    left:40px;
+    top:100px;
+}
+
+table{
+    width:450px;
+    border-collapse:collapse;
+}
+
+tr td{
+    text-align: center;
+    width: 160px;
+    height: 10px;
+    border: 1px solid black;
+    border-collapse: collapse;
+
+}
+td:first-child{
+    width:40px;
+    border:1px solid black;
+}
+
+#registF{
+    position:absolute;
+    left:130px;
+    top:700px;
+}
+
+#deleteF{
+    position:absolute;
+    left:130px;
+    top:730px; 
+}
