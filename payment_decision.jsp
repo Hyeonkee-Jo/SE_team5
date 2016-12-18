@@ -24,21 +24,6 @@
     String payment_plan = request.getParameter("credit_method");
 	int seatCount = Integer.parseInt(request.getParameter("seatCount"));
 	
-	%>
-<p><%out.print(userId);%></p>
-<p><%out.print(cinemaRegion);%></p>
-<p><%out.print(theaterName);%></p>
-<p><%out.print(startTime);%></p>
-<p><%out.print(cost);%></p>
-<p><%out.print(reserve_num);%></p>
-	<%
-	for(int i = 0; i < seatCount; i++) {
-		int row = Integer.parseInt(request.getParameter("row"+i));
-		int column = Integer.parseInt(request.getParameter("column"+i));
-		%>
-		<p><%out.print(row+","+column);%></p>
-		<%
-	}
     Connection conn = null;
     PreparedStatement pstmt;
     ResultSet rs;
@@ -133,16 +118,15 @@
         Statement stmt = conn.createStatement();
         String query = "INSERT INTO RESERVED_SEAT VALUES('"+reserve_num+"', "+row+", "+column+")";
         rs = stmt.executeQuery(query);
-        %><script>
-        alert("결제가 완료되었습니다.");
-        </script><%
 		} catch (Exception e) {
 			%><script>alert("Reservation_seat table is not created");
 			System.out.println(e.getMessage());</script><%
 		}
 	}		
-
 %>
+<script>
+   alert("결제가 완료되었습니다.");
+</script>
 
 <script>
 	document.location.href="movie_list.jsp";

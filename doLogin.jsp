@@ -38,7 +38,7 @@
 	
 	pstmt.setString(1, userId);
 	
-	if(userId.equals("admin"){
+	if(userId.equals("admin")){
 %>
 		<script>
 			document.location.href="manage_movie.jsp";

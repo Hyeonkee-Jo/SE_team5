@@ -66,6 +66,7 @@
 <a href="movie_reservation.jsp" id="reservation_tab">예매</a>
 <a href="member_info.jsp" id="my_info_tab">내 정보</a>
 <form method="post" action="update_customer.jsp" id="update_form">
+	<input type="text" name="customerId" value="<%out.print(customerId);%>" style="display:none">
 	<label for="password" id="password_label">비밀번호 : </label>
 	<input type="text" id="password" name="password" value="<%out.print(customerPw);%>" required><br>
 	<label for="name" id="name_label">이름 : </label>
@@ -79,6 +80,9 @@
 	<label for="eMail" id="eMail_label">이메일 : </label>
 	<input type="text" id="eMail" name="eMail" value="<%out.print(eMail);%>" required><br>
 </form> 
+<form method="post" action="delete_customer.jsp" id="delete_form">
+	<input type="text" name="customerId" value="<%out.print(customerId);%>" style="display:none">
+</form>
 <form method="post" action="reservation_detail.jsp">
 	<ol type>
 		<lh>예매 내역</lh>
@@ -92,8 +96,8 @@
 	</ol>
 </form>
 <button type = "submit" form="update_form"> 수 정 </button>
-<button type = "button"> 회원탈퇴 </button>
-<button type = "button"> 취 소 </button>
+<button type = "submit" form="delete_form"> 회원탈퇴 </button>
+<button type = "button" onClick="history.back()"> 취 소 </button>
 
 </body>
 </html>

@@ -121,17 +121,5 @@
 	<input type="text" name="column<%out.print(i);%>" value="<%out.print(columns[i]);%>" style=display:none>
 <%}%>
 </form>
-<p><%out.print(userId);%></p>
-<p><%out.print(cinemaRegion);%></p>
-<p><%out.print(theaterName);%></p>
-<p><%out.print(startTime);%></p>
-<p><%out.print(price);%></p>
-<p><%out.print(row);%></p>
-<p><%out.print(column);%></p>
-<p><%out.print(reservationNumber);%></p>
-
-<%for(int i = 0; i < count; i++) {%>
-<p><%out.print(rows[i] + "," + columns[i]);%></p>
-<%}%>
 </body>
 </html>

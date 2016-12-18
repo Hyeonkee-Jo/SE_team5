@@ -16,7 +16,7 @@
 	}
 
 	request.setCharacterEncoding("UTF-8");
-	String customerId = "jhlee";
+	String customerId = request.getParameter("customerId");
 	String password = request.getParameter("password");
 	String name = request.getParameter("name");
 	String address = request.getParameter("address");

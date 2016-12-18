@@ -8,11 +8,9 @@
 
 <%
 	
-	//String region =request.getParameter("cinemaRegion");
-	//String theaterName = request.getParameter("theaterName");
+	String region =request.getParameter("cinemaRegion");
+	String theaterName = request.getParameter("theaterName");
 	request.setCharacterEncoding("UTF-8");
-	String region ="대전 궁동";
-	String theaterName = "B1";
 	int seatPrice=0;
 	
 	SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd/hh");
@@ -147,8 +145,8 @@
 
     <form id="aboutPrice" action="modify_seatPrice.jsp">
         가격
-        <input type="text" name="region", style="visibility : hidden" value="<%out.print(region);%>"
-		<input type="text" name="theaterName", style="visibility : hidden" value="<%out.print(theaterName);%>"
+        <input type="text" name="region", style="visibility : hidden" value="<%out.print(region);%>">
+		<input type="text" name="theaterName", style="visibility : hidden" value="<%out.print(theaterName);%>">
 		<input type="text" name="mPrice" style="width: 100px" value="<%out.print(seatPrice);%>">
         <button type="submit">수정</button>
     </form>

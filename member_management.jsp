@@ -30,6 +30,9 @@
 <!DOCTYPE html>
 <html>
 <body>
+	<a href="manage_movie.jsp" id="movie_tab">영화</a>
+    <a href="manage_cinema.jsp" id="reservation_tab">영화관</a>
+    <a href="member_management.jsp" id="my_info_tab">회원정보</a>
     <ol type>
     <lh>회원 목록</lh>
     <%
@@ -37,13 +40,9 @@
     %>
     <form action = "member_detail.jsp">
         <li>
-    <%
-         out.print(rs.getString(1));
-    %>
-    <a href="member_detail.jsp" target="_self">
-        <button type = "submit" name = "usr_id" value = "<%out.print(rs.getString(1));%>"> 상세 </button>
-        </a></li>
-        </form>
+         <a href="member_detail.jsp?usr_id=<%out.print(rs.getString(1));%>"><%out.print(rs.getString(1));%></a>
+		</li>
+    </form>
     <%    
         }
     } catch (Exception e) {      

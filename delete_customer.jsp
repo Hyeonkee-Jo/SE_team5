@@ -18,36 +18,35 @@
 	
 	request.setCharacterEncoding("UTF-8");
 	response.setContentType("text/html; charset=UTF-8");
-	String movieTitle = request.getParameter("movieTitle");
+	String customerId = request.getParameter("customerId");
 	try {
-		String query = "DELETE FROM MOVIE WHERE MOVIE_TITLE = ?";
+		String query = "DELETE FROM CUSTOMER WHERE CUSTOMER_ID = ?";
 		PreparedStatement pstmt = conn.prepareStatement(query);
-		pstmt.setString(1, movieTitle);
+		pstmt.setString(1, customerId);
 		int rowCount = pstmt.executeUpdate();
 		
 		if(rowCount == 0) {
 		%>
 		<script>
-			alert("영화 삭제 실패");
+			alert("회원 탈퇴 실패");
 		</script>
 		<%
 		}
 		else {
 		%>
 		<script>
-			alert("영화 삭제 성공");
+			alert("회원 탈퇴 성공");
 		</script>
 		<%			
 		}		
 	} catch (SQLException e) {
 		%>
 		<script>
-			alert("영화 삭제 오류");
+			alert("회원 탈퇴 오류");
 		</script>
 		<%	
 	}
 %>
 <script>
-	document.location.href="manage_movie.jsp"
+	document.location.href="login.jsp"
 </script>
-

@@ -22,13 +22,7 @@
 	String rating="";
 	String story="";
 	String synopsis="";
- 
- 
- 
- 
- 
- 
- 
+
 	try{
 		MultipartRequest multi=new MultipartRequest(request, realFolder, maxSize, encType, new DefaultFileRenamePolicy());
 	
@@ -75,14 +69,14 @@
 %>
 		<script>
 			alert("영화 삽입 실패");
-			document.location.href="movie_list.jsp";	
+			document.location.href="manage_movie.jsp";	
 		</script>
 <%		
 	}
 %>
 		<script>
 			alert("영화 추가 완료");
-			document.location.href="movie_list.jsp";	
+			document.location.href="manage_movie.jsp";	
 		</script>
 <%		
 	

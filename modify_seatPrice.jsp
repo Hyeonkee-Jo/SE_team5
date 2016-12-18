@@ -8,10 +8,6 @@
 	String region = request.getParameter("region");
 	String theaterName= request.getParameter("theaterName");
 	
-	
-	
-
-		
 	String DRIVER = "oracle.jdbc.driver.OracleDriver";
 	String URL = "jdbc:oracle:thin:@127.0.0.1:1521:DBSERVER";
 	String USER = "SE";
@@ -20,7 +16,6 @@
 	Connection conn = null;
 	PreparedStatement pstmt;
 	ResultSet rs;
-	
 	
 	try{
 		Class.forName(DRIVER);
@@ -49,3 +44,6 @@
 	}
 
 %>
+<script>
+	document.location.href="manage_cinema.jsp"
+</script>

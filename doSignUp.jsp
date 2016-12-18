@@ -47,6 +47,7 @@
 	try{
 		rs = pstmt.executeQuery();	
 		rs.next();				//같은 아이디가 존재하는지 한번 확인해본다
+		rs.getString(1);
 		aleadyExist = true;
 	}
 	catch(Exception e){
@@ -71,6 +72,9 @@
 	if(aleadyExist){
 %>
 		<script>alert("이미 해당 아이디가 존재합니다!");</script>
+		<script> 
+		document.location.href="login.jsp";
+		</script>
 <%		
 	}
 	if(success){

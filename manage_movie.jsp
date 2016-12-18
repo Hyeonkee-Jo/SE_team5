@@ -45,6 +45,9 @@
 	<link rel="stylesheet" href="css/manage_movie.css">
 </head>
 <body>
+	<a href="manage_movie.jsp" id="movie_tab">영화</a>
+    <a href="manage_cinema.jsp" id="reservation_tab">영화관</a>
+    <a href="member_management.jsp" id="my_info_tab">회원정보</a>
     <form id="theater_detail" action="theater_detail.jsp">
     <div id="listMovieR">
         <p style="margin-left:30px; font-weight:bold">영화 목록</p>
@@ -59,7 +62,7 @@
         </div>
     </div>
 	</form>
-    <form id="deleteArea" action="" >
+    <form id="deleteArea" action="regist_movie.jsp" >
         <button type="submit" style="margin-left:10px;">등록</button>
     </form>
 </body>

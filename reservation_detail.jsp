@@ -132,7 +132,7 @@
 	<input type = "text" id="price" name = "price" value="<%out.print(price);%>"><br>
 </form>
 
-<button type="submit" form="delete_form"> 예매취소 </button>
+<button type="submit" form="delete_form" onclick="history.back()"> 예매취소 </button>
 
 </body>
 </html>
