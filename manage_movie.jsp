@@ -19,14 +19,14 @@
 
 	request.setCharacterEncoding("UTF-8");
 	response.setContentType("text/html; charset=UTF-8");
-	ArrayList<String> cinemaRegionList = new ArrayList<String>();
+	ArrayList<String> movieList = new ArrayList<String>();
 	try {
-		String query = "SELECT CINEMA_REGION FROM CINEMA";
+		String query = "SELECT MOVIE_TITLE FROM MOVIE";
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery(query);
 		
 		while(rs.next()) {
-			cinemaRegionList.add(rs.getString(1));
+			movieList.add(rs.getString(1));
 		}
 			
 	} catch (SQLException e) {
@@ -42,27 +42,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-   <link rel="stylesheet" href="css/manage_cinema.css">
+	<link rel="stylesheet" href="css/manage_movie.css">
 </head>
 <body>
     <form id="theater_detail" action="theater_detail.jsp">
     <div id="listMovieR">
-        <p style="margin-left:30px; font-weight:bold">영화관 목록</p>
+        <p style="margin-left:30px; font-weight:bold">영화 목록</p>
         <hr>
         <div id="listMovie">
             <ul>
-			<%for(String cinemaRegion : cinemaRegionList) {%>
-				<li><a href="theater_detail.jsp?cinemaRegion=<%out.print(cinemaRegion);%>" onclick="parentNode.submit()" ><%out.print(cinemaRegion);%></a>
-				<button type="submit" name="cinemaRegion" value="<%out.print(cinemaRegion);%>" formaction="delete_cinema.jsp">삭제</button></li>
+			<%for(String movie : movieList) {%>
+				<li><a href="theater_detail.jsp?movieTitle=<%out.print(movie);%>" ><%out.print(movie);%></a>
+				<button type="submit" name="movieTitle" value="<%out.print(movie);%>" formaction="delete_movie.jsp">삭제</button></li>
 			<%}%>       
             </ul>
         </div>
     </div>
 	</form>
-    <form id="deleteArea" action="add_cinema.jsp" >
-        <label for="cinema_region" id="cinema_region_label">지역 : </label>
-        <input type="text"  id="cinema_region" name="cinemaRegion" style="margin-left:10px;">
-        <button type="submit" style="margin-left:10px;">추가</button>
+    <form id="deleteArea" action="" >
+        <button type="submit" style="margin-left:10px;">등록</button>
     </form>
 </body>
 </html>

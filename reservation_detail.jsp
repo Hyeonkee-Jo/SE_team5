@@ -98,7 +98,7 @@
 		ResultSet rs = pstmt.executeQuery();
 		
 		while(rs.next()) {
-			seat = rs.getInt(1) + rs.getInt(2) + " ";
+			seat = seat + rs.getInt(1) + "," + rs.getInt(2) + " ";
 		}
 		
 	} catch(SQLException e) {

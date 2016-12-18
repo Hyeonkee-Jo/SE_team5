@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
 <%@ page import ="java.sql.*" %>
     
@@ -8,13 +8,22 @@
     String USER = "SE";
     String PASS = "SE";
 
+	Connection conn = null;
+	try{
+		Class.forName(DRIVER);
+		conn = DriverManager.getConnection(URL,USER,PASS);
+	}catch(Exception e){
+		System.out.println(e.getMessage());
+	}
+	
+	request.setCharacterEncoding("UTF-8");
+	response.setContentType("text/html; charset=UTF-8");
+	String reservationNumber = request.getParameter("reservationNumber");
     String userId = (String)session.getAttribute("userId");
-    String movieTitle = request.getParameter("movieTitle");
     String cinemaRegion = request.getParameter("cinemaRegion");
     String theaterName = request.getParameter("theaterName");
     String startTime = request.getParameter("startTime");
     String price = request.getParameter("price");
-    String reserve_number = "R4000";
     int row = Integer.parseInt(request.getParameter("row"));
     int column = Integer.parseInt(request.getParameter("column"));
     
@@ -25,7 +34,7 @@
 	for(int i = 1; i <= row; i++) {
 		for(int j = 1; j <= column; j++) {
 			String a = "seat" + i + "" + j;
-			int d = Integer.parseInt(request.getParameter(a));
+			int d = Integer.parseInt(request.getParameter("seat" + i + "" + j));
 			if(d == 1) {
 				rows[count] = i;
 				columns[count++] = j;
@@ -101,6 +110,16 @@
         <button type = "button"> 취 소 </button>
     </a>
 </p>
+<input type="text" name="cinemaRegion" value="<%out.print(cinemaRegion);%>" style=display:none>
+<input type="text" name="price" value="<%out.print(price);%>" style=display:none>
+<input type="text" name="theaterName" value="<%out.print(theaterName);%>" style=display:none>
+<input type="text" name="startTime" value="<%out.print(startTime);%>" style=display:none>
+<input type="text" name="reservationNumber" value="<%out.print(reservationNumber);%>" style=display:none>
+<input type="text" name="seatCount" value="<%out.print(count);%>" style=display:none>
+<%for(int i = 0; i < count; i++) {%>
+	<input type="text" name="row<%out.print(i);%>" value="<%out.print(rows[i]);%>" style=display:none>
+	<input type="text" name="column<%out.print(i);%>" value="<%out.print(columns[i]);%>" style=display:none>
+<%}%>
 </form>
 <p><%out.print(userId);%></p>
 <p><%out.print(cinemaRegion);%></p>
@@ -109,6 +128,7 @@
 <p><%out.print(price);%></p>
 <p><%out.print(row);%></p>
 <p><%out.print(column);%></p>
+<p><%out.print(reservationNumber);%></p>
 
 <%for(int i = 0; i < count; i++) {%>
 <p><%out.print(rows[i] + "," + columns[i]);%></p>

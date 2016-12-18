@@ -1,52 +1,60 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
 <%@ page import ="java.sql.*" %>
 <%@ page import = "java.util.Random" %>
 
 <%
-   String DRIVER = "oracle.jdbc.driver.OracleDriver";
-   String URL = "jdbc:oracle:thin:@127.0.0.1:1521:DBSERVER"; 
-   String USER = "SE";
-   String PASS = "SE";
+    String DRIVER = "oracle.jdbc.driver.OracleDriver";
+    String URL = "jdbc:oracle:thin:@127.0.0.1:1521:DBSERVER"; 
+    String USER = "SE";
+    String PASS = "SE";
 
-   boolean isPNExist = false;
-   boolean flag = true;
-   String phone_num = request.getParameter("phone_number");
-   // 값 넣어준 것은 다 값 받아와야되는 것들 (request 하지 않은 부분)
-   int cost = 10000;
-   String userId = "jo"; 
-   String reserve_num = "R2003";
-   String cinema_region = "DJ";
-   String theater_name = "B1";
-   String start_time; // 'YY/MM/DD/HH24/MI'의 형태로 받기
-   String payment_number = "";
-   String payment_plan = request.getParameter("credit_method");
-   int seat_row = 1;
-   int seat_column = 3;
-   Connection conn = null;
-   PreparedStatement pstmt;
-   ResultSet rs;
+   	request.setCharacterEncoding("UTF-8");
+	response.setContentType("text/html; charset=UTF-8");
+    boolean isPNExist = false;
+    boolean flag = true;
+    String phone_num = request.getParameter("phone_number");
+    String reserve_num = request.getParameter("reservationNumber");
+    String userId = (String)session.getAttribute("userId");
+    String cinemaRegion = request.getParameter("cinemaRegion");
+    String theaterName = request.getParameter("theaterName");
+    String startTime = request.getParameter("startTime");
+    int cost = Integer.parseInt(request.getParameter("price"));
+    String payment_number = "";
+    String payment_plan = request.getParameter("credit_method");
+	int seatCount = Integer.parseInt(request.getParameter("seatCount"));
+	
+	%>
+<p><%out.print(userId);%></p>
+<p><%out.print(cinemaRegion);%></p>
+<p><%out.print(theaterName);%></p>
+<p><%out.print(startTime);%></p>
+<p><%out.print(cost);%></p>
+<p><%out.print(reserve_num);%></p>
+	<%
+	for(int i = 0; i < seatCount; i++) {
+		int row = Integer.parseInt(request.getParameter("row"+i));
+		int column = Integer.parseInt(request.getParameter("column"+i));
+		%>
+		<p><%out.print(row+","+column);%></p>
+		<%
+	}
+    Connection conn = null;
+    PreparedStatement pstmt;
+    ResultSet rs;
+    
+    try{
+		Class.forName(DRIVER);
+		conn = DriverManager.getConnection(URL,USER,PASS);
+    }catch(Exception e){
+		System.out.println(e.getMessage());
+    }
    
-   try{
-      Class.forName(DRIVER);
-      conn = DriverManager.getConnection(URL,USER,PASS);
-   }catch(Exception e){
-      System.out.println(e.getMessage());
-   }
-   
-   try {
-      DatabaseMetaData meta = conn.getMetaData();
-      System.out.println("time data: " + meta.getTimeDateFunctions());
-      System.out.println("user: " + meta.getUserName());
-   } catch (SQLException e) {
-      System.out.println(e.getMessage());
-   }
-   
-   if(payment_plan.equals("PHONE")) {
-        try {
-        Statement stmt = conn.createStatement();  
-        String query = "SELECT * FROM CUSTOMER WHERE CUSTOMER_ID = '" + userId + "'";
-        rs = stmt.executeQuery(query);
+	if(payment_plan.equals("PHONE")) {
+		try {
+		Statement stmt = conn.createStatement();  
+		String query = "SELECT * FROM CUSTOMER WHERE CUSTOMER_ID = '" + userId + "'";
+		rs = stmt.executeQuery(query);
         rs.next();
         
         if(!phone_num.equals(rs.getString(5))) {
@@ -60,11 +68,11 @@
         %><script>alert("aa");</script><%
         System.out.println(e.getMessage());
         }
-   }
+	}
                                          
-   while(flag) {
+	while(flag) {
         try {
-            Statement stmt = conn.createStatement();  
+			Statement stmt = conn.createStatement();  
             String query = "SELECT PAYMENT_NUMBER FROM PAYMENT";
             rs = stmt.executeQuery(query);
 
@@ -109,25 +117,33 @@
                                           
     try {
         Statement stmt = conn.createStatement();
-        String query = "INSERT INTO RESERVATION VALUES('"+reserve_num+"',"+ cost+", TO_DATE(SYSDATE, 'YY/MM/DD/HH24/MI'), '"+userId+"', '"+cinema_region +"', '"+theater_name+"', TO_DATE('16/12/12/12/30', 'YY/MM/DD/HH24/MI'), '" +payment_number+"')";
+        String query = "INSERT INTO RESERVATION VALUES('"+reserve_num+"',"+ cost+", TO_DATE(SYSDATE, 'YY/MM/DD/HH24/MI'), '"+userId+"', '"+cinemaRegion +"', '"+theaterName+"', TO_DATE('"+startTime+"', 'YY/MM/DD/HH24/MI'), '" +payment_number+"')";
         rs = stmt.executeQuery(query);
     } catch (Exception e) {
-        %><script>alert("Reservation table is not created");
-            document.location.href ="payment.jsp";</script><%
+        %><script>alert("Reservation table is not created");</script><%
         System.out.println(e.getMessage());
     }  
     
-     try {
+	
+	for(int i = 0; i < seatCount; i++) {
+		int row = Integer.parseInt(request.getParameter("row"+i));
+		int column = Integer.parseInt(request.getParameter("column"+i));
+		
+		try {
         Statement stmt = conn.createStatement();
-        String query = "INSERT INTO RESERVED_SEAT VALUES('"+reserve_num+"', "+seat_row+", "+seat_column+")";
+        String query = "INSERT INTO RESERVED_SEAT VALUES('"+reserve_num+"', "+row+", "+column+")";
         rs = stmt.executeQuery(query);
         %><script>
         alert("결제가 완료되었습니다.");
-        document.location.href ="payment.jsp";
         </script><%
-    } catch (Exception e) {
-        %><script>alert("Reservation_seat table is not created");
-            document.location.href ="payment.jsp";</script><%
-        System.out.println(e.getMessage());
-    }  
+		} catch (Exception e) {
+			%><script>alert("Reservation_seat table is not created");
+			System.out.println(e.getMessage());</script><%
+		}
+	}		
+
 %>
+
+<script>
+	document.location.href="movie_list.jsp";
+</script>

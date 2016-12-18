@@ -7,6 +7,7 @@
 	String URL = "jdbc:oracle:thin:@127.0.0.1:1521:DBSERVER";
 	String USER = "SE";
 	String PASS = "SE";
+	
 	Connection conn = null;
 	try{
 		Class.forName(DRIVER);
@@ -17,37 +18,34 @@
 	
 	request.setCharacterEncoding("UTF-8");
 	response.setContentType("text/html; charset=UTF-8");
-	String cinemaRegion = request.getParameter("cinemaRegion");
-	
+	String movieTitle = request.getParameter("movieTitle");
+	%><p><%out.print(movieTitle);%><%
 	try {
-		String query = "DELETE FROM CINEMA WHERE CINEMA_REGION = ?";
+		String query = "DELETE FROM MOVIE WHERE MOVIE_TITLE = ?";
 		PreparedStatement pstmt = conn.prepareStatement(query);
-		pstmt.setString(1, cinemaRegion);
+		pstmt.setString(1, movieTitle);
 		int rowCount = pstmt.executeUpdate();
 		
 		if(rowCount == 0) {
 		%>
 		<script>
-			alert("영화관 삭제 실패");
+			alert("영화 삭제 실패");
 		</script>
 		<%
 		}
 		else {
 		%>
 		<script>
-			alert("영화관 삭제 성공");
+			alert("영화 삭제 성공");
 		</script>
 		<%			
 		}		
 	} catch (SQLException e) {
 		%>
 		<script>
-			alert("영화관 삭제 오류");
+			alert("영화 삭제 오류");
 		</script>
 		<%	
 	}
 %>
 
-<script>
-	document.location.href="manage_cinema.jsp";
-</script>
