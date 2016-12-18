@@ -145,8 +145,8 @@
 
     <form id="aboutPrice" action="modify_seatPrice.jsp">
         가격
-        <input type="text" name="region", style="visibility : hidden" value="<%out.print(region);%>">
-		<input type="text" name="theaterName", style="visibility : hidden" value="<%out.print(theaterName);%>">
+        <input type="text" name="region", style="display : none" value="<%out.print(region);%>">
+		<input type="text" name="theaterName", style="display : none" value="<%out.print(theaterName);%>">
 		<input type="text" name="mPrice" style="width: 100px" value="<%out.print(seatPrice);%>">
         <button type="submit">수정</button>
     </form>
@@ -308,8 +308,8 @@
     
     <form id="registF" name="add_schedule.jsp">
     
-		<input type="text" name="region", style="visibility : hidden" value="<%out.print(region);%>">
-		<input type="text" name="theaterName", style="visibility : hidden" value="<%out.print(theaterName);%>">
+		<input type="text" name="region", style="display : none" value="<%out.print(region);%>">
+		<input type="text" name="theaterName", style="display : none" value="<%out.print(theaterName);%>">
 	
 		<select id="select_movie" name="whatMovie" >
 			<option value="" >영화선택</option>
@@ -362,8 +362,8 @@
     </form>
 	
     <form id="deleteF" action= "delete_schedule.jsp">
-		<input type="text" name="region", style="visibility : hidden" value="<%out.print(region);%>">
-		<input type="text" name="theaterName", style="visibility : hidden" value="<%out.print(theaterName);%>">
+		<input type="text" name="region", style="display : none" value="<%out.print(region);%>">
+		<input type="text" name="theaterName", style="display : none" value="<%out.print(theaterName);%>">
 		
         <select id="select_time" name="selectedSchedule" >
 			
